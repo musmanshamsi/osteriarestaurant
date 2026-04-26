@@ -72,7 +72,8 @@ const Auth = () => {
           password: parsed.data.password,
         });
         if (error) {
-          toast.error(error.message.includes("Invalid") ? "Invalid email or password." : error.message);
+          if (error.message.includes("Email not confirmed")) toast.error("Please confirm your email before signing in.");
+          else toast.error(error.message.includes("Invalid") ? "Invalid email or password." : error.message);
           return;
         }
         toast.success("Welcome back!");
