@@ -1,14 +1,16 @@
-const path = require("path");
-const express = require("express");
-const cors = require("cors");
+const express  = require("express");
+const cors     = require("cors");
 
-// Mock routes (updated to use in-memory db)
-const ordersRouter = require("./routes/orders");
-const menuRouter = require("./routes/menu");
-const receiptsRouter = require("./routes/receipts");
+// ─── Import Routes ────────────────────────────────────────────────────────────
+const authRouter      = require("./routes/auth");
+const menuRouter      = require("./routes/menu");
+const ordersRouter    = require("./routes/orders");
+const receiptsRouter  = require("./routes/receipts");
 const analyticsRouter = require("./routes/analytics");
+const reviewsRouter   = require("./routes/reviews");
+const usersRouter     = require("./routes/users");
 
-const app = express();
+const app  = express();
 const PORT = process.env.PORT || 3001;
 
 // ─── Middleware ────────────────────────────────────────────────────────────────
@@ -23,14 +25,17 @@ app.use((req, _res, next) => {
 });
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
-app.use("/api/orders", ordersRouter);
-app.use("/api/menu", menuRouter);
-app.use("/api/receipts", receiptsRouter);
+app.use("/api/auth",      authRouter);
+app.use("/api/menu",      menuRouter);
+app.use("/api/orders",    ordersRouter);
+app.use("/api/receipts",  receiptsRouter);
 app.use("/api/analytics", analyticsRouter);
+app.use("/api/reviews",   reviewsRouter);
+app.use("/api/users",     usersRouter);
 
 // ─── Health Check ─────────────────────────────────────────────────────────────
 app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok", mode: "in-memory", timestamp: new Date().toISOString() });
+  res.json({ status: "ok", mode: "sqlite", timestamp: new Date().toISOString() });
 });
 
 // ─── 404 Handler ──────────────────────────────────────────────────────────────
@@ -41,12 +46,12 @@ app.use((_req, res) => {
 // ─── Error Handler ────────────────────────────────────────────────────────────
 app.use((err, _req, res, _next) => {
   console.error("[Server Error]", err);
-  res.status(500).json({ error: "Internal server error" });
+  res.status(500).json({ error: "Internal server error", detail: err.message });
 });
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`\n🍕 Bite-Friendly Order API (In-Memory) running on http://localhost:${PORT}`);
+  console.log(`\n🍕 Osteria Bella API (SQLite) running on http://localhost:${PORT}`);
   console.log(`   Health: http://localhost:${PORT}/api/health\n`);
 });
 

@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# SQLite database (runtime data — seeded automatically on first start)
+server/osteria.db
+server/osteria.db-shm
+server/osteria.db-wal
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

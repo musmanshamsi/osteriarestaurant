@@ -1,51 +1,51 @@
-import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { findUserByCredentials, registerUser } from "@/lib/store";
 
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser]       = useState(null);
+  const [user,    setUser]    = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Load user from localStorage on mount
+  // Restore session from localStorage on mount (only the user object, DB is source of truth)
   useEffect(() => {
-    const savedUser = localStorage.getItem("osteria_user");
-    if (savedUser) {
+    const saved = localStorage.getItem("osteria_session");
+    if (saved) {
       try {
-        const u = JSON.parse(savedUser);
+        const u = JSON.parse(saved);
         setUser(u);
         setIsAdmin(u.role === "admin");
-      } catch (err) {
-        console.error("Failed to parse saved user", err);
-        localStorage.removeItem("osteria_user");
+      } catch {
+        localStorage.removeItem("osteria_session");
       }
     }
     setLoading(false);
   }, []);
 
   const signIn = async (email, password) => {
+    // Calls POST /api/auth/login → validates against SQLite users table
     const u = await findUserByCredentials(email, password);
     if (!u) throw new Error("Invalid email or password");
-    
     setUser(u);
     setIsAdmin(u.role === "admin");
-    localStorage.setItem("osteria_user", JSON.stringify(u));
+    localStorage.setItem("osteria_session", JSON.stringify(u));
     return u;
   };
 
   const signUp = async (email, password, name) => {
+    // Calls POST /api/auth/register → inserts into SQLite users table
     const u = await registerUser({ email, password, name });
     setUser(u);
     setIsAdmin(u.role === "admin");
-    localStorage.setItem("osteria_user", JSON.stringify(u));
+    localStorage.setItem("osteria_session", JSON.stringify(u));
     return u;
   };
 
-  const signOut = async () => {
+  const signOut = () => {
     setUser(null);
     setIsAdmin(false);
-    localStorage.removeItem("osteria_user");
+    localStorage.removeItem("osteria_session");
   };
 
   return (
