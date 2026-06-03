@@ -493,30 +493,13 @@ This project is provided as-is for educational purposes.
 
 ---
 
-## 👨‍💻 Author
+## � Support
 
-**Musman Shamsi**  
-Enterprise Application Development Student  
-Osteria Bella Dev Team
+For issues, questions, or feature requests, please open an issue on the GitHub repository.
 
 ---
 
-## 🔗 Quick Links
-
-- 📧 **Email:** musmanshamsi@email.com
-- 🐙 **GitHub:** [musmanshamsi](https://github.com/musmanshamsi)
-- 📱 **Repository:** [https://github.com/musmanshamsi/osteriarestaurant](https://github.com/musmanshamsi/osteriarestaurant)
-
----
-
-## 📞 Support
-
-For issues, questions, or feature requests, please open an issue on GitHub or contact the development team.
-
----
-
-*Created with Passion & Italian Hospitality by the Osteria Bella Dev Team.*  
-*Last Updated: June 3, 2026*
+*Osteria Bella is maintained for educational purposes and can be enhanced with contributions via GitHub issues.*
 ```json
 {
   "id": "m01",
