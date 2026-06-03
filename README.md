@@ -1,107 +1,522 @@
 # 🍝 Osteria Bella (Bite-Friendly Order)
-> **An Enterprise Application Development (EAD) & Human-Computer Interaction (HCI) Web Platform**
+
+**Enterprise Application Development (EAD) & Human-Computer Interaction (HCI) Web Platform**
 
 [![Vite](https://img.shields.io/badge/Vite-5.4.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Express](https://img.shields.io/badge/Express-4.19-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![SQLite](https://img.shields.io/badge/SQLite-3.x-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Vitest](https://img.shields.io/badge/Vitest-3.2-76E2B9?style=for-the-badge&logo=vitest&logoColor=black)](https://vitest.dev/)
-[![ESLint](https://img.shields.io/badge/ESLint-9.3-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 
-Osteria Bella is a premium, full-stack food ordering and kitchen management system designed with a warm, authentic Italian bistro aesthetic. Adhering to strict HCI standards, it provides a seamless customer ordering flow alongside a real-time kitchen administration dashboard, business analytics widgets, and a menu CRUD editor.
+## 📋 Project Description
 
----
+Osteria Bella is a premium, full-stack **food ordering and kitchen management system** designed with a warm, authentic Italian bistro aesthetic. The application adheres to strict HCI (Human-Computer Interaction) standards and provides:
 
-## 🇮🇹 1. HCI & Visual Design System
+- **Customer Experience**: Seamless, intuitive menu browsing, cart management, and order placement
+- **Admin Dashboard**: Real-time kitchen order management with live status tracking
+- **Business Intelligence**: Analytics widgets displaying revenue, orders, and category-wise sales
+- **Menu Management**: Complete CRUD operations for menu items with availability control
+- **Review System**: Customers can rate items and leave feedback
 
-The platform transitions from sterile, generic templates into a humanized, warm interactive experience tailored to a rustic Italian bistro:
-
-### 🎨 Color Palette & Aesthetics
-- **Warm Linen (`bg-background`)**: Soft cream tones instead of harsh white screens, reducing eye fatigue.
-- **Deep Terracotta (`text-primary`)**: Rich tomato-red accents for primary buttons, focus states, and branding.
-- **Amalfi Gold (`text-gold`)**: Warm amber status indicators and star icons.
-- **Basil Green**: Fresh green highlights for open/available indicators and completed tags.
-- **Glassmorphic Interfaces**: Headers and interactive drawers leverage backing blurs (`backdrop-blur-sm`) with soft translucent borders (`border-border/60`) for clean spatial depth.
-
-### ✨ Micro-Animations
-- **Rotating Brand Logo**: The brand mark (`UtensilsCrossed`) smoothly rotates 15 degrees on hover.
-- **Smooth Scaling**: Action buttons scale down slightly on click (`active:scale-95`) to offer high tactile responsiveness.
-- **Animate Pop-in**: Cart badges and alert banners slide into view dynamically to draw focus without being obtrusive.
+The system follows a **three-tier architecture** (Frontend → Backend → Database) with clean separation of concerns, proper error handling, and responsive design.
 
 ---
 
-## 🛠️ 2. Decoupled System Architecture
+## ✨ Key Features
 
-The application relies on a modern, decoupled architecture allowing for independent scaling and high performance:
+- ✅ **User Authentication** - Sign In / Sign Up with validation
+- ✅ **Menu Management** - Browse, search, filter, and sort menu items by category and price
+- ✅ **Shopping Cart** - Add/remove items, adjust quantities, calculate totals
+- ✅ **Order Placement** - Secure checkout with address and notes validation
+- ✅ **Order Tracking** - View order history and real-time status updates (pending → preparing → ready → delivered)
+- ✅ **Review System** - Rate items and leave feedback comments
+- ✅ **Admin Dashboard** - Manage menu items (CRUD), track orders, view analytics
+- ✅ **Business Analytics** - KPIs, revenue tracking, top-selling items, daily charts
+- ✅ **Receipt Generation** - Generate and view order receipts
+- ✅ **Responsive Design** - Works on mobile, tablet, and desktop
+- ✅ **Real-time Notifications** - Toast alerts for order updates and user actions
+- ✅ **Role-Based Access** - Admin dashboard only accessible to admin users
 
-```mermaid
-graph TD
-    subgraph Client-Side (Vite + React)
-        A[React UI Components] --> B[React Router DOM]
-        A --> C[Context API - AuthContext & CartContext]
-        A --> D[Local API Client - src/lib/api.js]
-    end
+---
 
-    subgraph Data & Persistence Layer
-        D --> E[(Local Storage Persistence)]
-        F[(In-Memory Database - server/db.js)]
-    end
+## 🛠️ Technologies Used
 
-    subgraph Server-Side (Node.js + Express)
-        G[Express App - Port 3001] --> H[Middleware - Auth & Validation]
-        G --> I[Routes - Menu, Orders, Analytics, Receipts]
-        I --> F
-    end
+### Frontend Stack
+| Technology | Purpose | Version |
+|-----------|---------|---------|
+| **React** | UI library with functional components | 18.3 |
+| **Vite** | Build tool and dev server | 5.4 |
+| **React Router** | Client-side routing | 6.30 |
+| **Tailwind CSS** | Utility-first CSS framework | 3.4 |
+| **Shadcn/UI** | Component library (Radix UI primitives) | Latest |
+| **Lucide React** | Icon library | 0.462 |
+| **Zod** | Schema validation | 3.25 |
+| **Sonner** | Toast notifications | 1.7 |
+| **React Hook Form** | Form state management | 7.61 |
+| **Context API** | State management (AuthContext, CartContext) | Built-in |
 
-    classDef client fill:#fcf8f2,stroke:#c2410c,stroke-width:2px;
-    classDef server fill:#f5ebe0,stroke:#854d0e,stroke-width:2px;
-    classDef storage fill:#f3f4f6,stroke:#4b5563,stroke-width:2px;
-    class A,B,C,D client;
-    class G,H,I server;
-    class E,F storage;
+### Backend Stack
+| Technology | Purpose | Version |
+|-----------|---------|---------|
+| **Node.js** | JavaScript runtime | 22.x |
+| **Express** | Web framework | 4.19 |
+| **Better-SQLite3** | Synchronous SQLite driver | 12.10 |
+| **CORS** | Cross-Origin Resource Sharing | 2.8 |
+| **JWT** | JSON Web Tokens (auth) | 9.0 |
+
+### Database
+- **SQLite** - Embedded relational database with persistent file storage
+
+---
+
+## 📦 Installation & Setup
+
+### Prerequisites
+- **Node.js** 18+ and **npm** installed on your system
+- **Git** (optional, for cloning the repository)
+
+### Step 1: Clone or Extract Project
+
+```bash
+# If cloning from GitHub
+git clone https://github.com/musmanshamsi/osteriarestaurant.git
+cd osteriarestaurant
+
+# Or if already extracted
+cd osteriarestaurant
 ```
 
-### Core Stack
-- **Frontend**: Vite + React 18, Tailwind CSS, Radix UI Primitives (Shadcn/ui templates), Lucide React icons, and React Router DOM.
-- **Backend**: Node.js, Express API server running on port `3001`, Zod schemas, and local in-memory DB persistence.
-- **Simulated Real-time**: A 10-second polling mechanism that monitors database updates and fires push notifications using the `Sonner` toast engine.
+### Step 2: Install Root Dependencies
 
----
-
-## 🚀 3. Core Features & Workflows
-
-### A. Customer Order Journey
-1. **Interactive Menu**: Dynamic category filters (Starters, Pizzas, Pastas, Desserts, Drinks) with real-time indicators for food item availability.
-2. **One-Click Cart**: Incremental/decremental quantities, real-time total calculation, and local preservation using React Context (`CartContext`).
-3. **Zod-Validated Checkout**: Secure checkout form requiring valid delivery details (e.g. addresses with a 5-character minimum) and customizable preparation notes.
-4. **Real-time Order Alerts**: Tracks kitchen status shifting through `pending` ➔ `preparing` ➔ `ready` ➔ `delivered` with automatic notifications.
-5. **Rating & Feedback Drawer**: Integrated feedback drawer where users can rate and leave comments on menu items they've purchased.
-
-### B. Enterprise Admin Portal
-1. **Premium Credentials Autofill**: One-click login buttons for **Chef Marco (Admin)** and **Sofia Esposito (Customer)**. This completely masks the complex credentials from public UI displays while enabling high-speed testing.
-2. **Kitchen FIFO Monitor**: Queue display following First In, First Out logic. Admins can update status or cancel orders in a single click.
-3. **Menu CRUD GUI**: Fully managed menu list with drawers to toggle item availability, edit descriptions, adjust pricing, or upload asset links.
-4. **Business Analytics Panel**: Beautiful visual indicators displaying:
-   - Today's Total Revenue ($)
-   - Total Orders Processed
-   - Average Order Ticket Size ($)
-   - Category-wise sales breakdowns.
-
----
-
-## 💾 4. Database Schema & Models
-
-### User Account Model
-```json
-{
-  "id": "user-cust-002",
-  "email": "customer@osteria.com",
-  "password": "SofiaEsposito_Osteria2026!",
-  "name": "Sofia Esposito",
-  "role": "customer" // "admin" | "customer"
-}
+```bash
+npm install
 ```
 
-### Menu Item Model
+This installs dependencies for the frontend.
+
+### Step 3: Install Backend Dependencies
+
+```bash
+cd server
+npm install
+cd ..
+```
+
+This installs Express, SQLite, and other backend dependencies.
+
+---
+
+## 🚀 Running the Project
+
+### Option 1: Run Both Frontend & Backend Together (Recommended)
+
+```bash
+npm run dev:full
+```
+
+This command:
+- Starts the Vite frontend dev server on **http://localhost:5173**
+- Starts the Express backend on **http://localhost:3001**
+- Automatically initializes the SQLite database with seed data on first run
+
+**Open your browser and navigate to: `http://localhost:5173`**
+
+### Option 2: Run Frontend Only
+
+```bash
+npm run dev
+```
+
+The frontend will be available on **http://localhost:5173** (but API calls won't work without the backend running).
+
+### Option 3: Run Backend Only
+
+```bash
+npm run server
+```
+
+The backend API will be available on **http://localhost:3001**. Test with:
+
+```bash
+curl http://localhost:3001/api/health
+```
+
+Expected response: `{"status":"ok","mode":"sqlite","timestamp":"..."}`
+
+### Option 4: Run Separately in Different Terminals
+
+**Terminal 1 - Frontend:**
+```bash
+npm run dev
+```
+
+**Terminal 2 - Backend:**
+```bash
+npm run server
+```
+
+---
+
+## 🗄️ Database Setup
+
+### Automatic Initialization
+
+The database is **automatically initialized** on first backend startup:
+
+```bash
+npm run server
+```
+
+You will see:
+```
+✅ SQLite database ready: .../server/osteria.db
+✓ Seeded default users
+✓ Seeded default menu items
+✓ Seeded default reviews
+
+🍕 Osteria Bella API (SQLite) running on http://localhost:3001
+```
+
+### Database File Location
+
+- **Windows**: `osteriarestaurant/server/osteria.db`
+- **Mac/Linux**: `osteriarestaurant/server/osteria.db`
+
+### Database Tables
+
+The SQLite database contains 5 tables:
+
+1. **users** - User accounts with roles (admin/customer)
+2. **menu_items** - Restaurant menu items with pricing and availability
+3. **orders** - Customer orders with status tracking
+4. **order_items** - Line items within each order
+5. **reviews** - Customer reviews and ratings
+
+### Seed Data
+
+Default test accounts are created on first startup:
+
+| Email | Password | Role |
+|-------|----------|------|
+| `admin@osteria.com` | `ChefMarco_Osteria2026!` | Admin |
+| `customer@osteria.com` | `SofiaEsposito_Osteria2026!` | Customer |
+
+### Manual Database Reset
+
+To reset the database and reseed it, delete the database file and restart the server:
+
+```bash
+# Windows
+del server/osteria.db
+
+# Mac/Linux
+rm server/osteria.db
+```
+
+Then restart:
+```bash
+npm run server
+```
+
+---
+
+## 🔐 Environment Variables
+
+### Backend (.env)
+
+Create a `.env` file in the `server/` directory (copy from `.env.example`):
+
+```bash
+# .env file location: server/.env
+
+# Server port
+PORT=3001
+
+# Database (SQLite uses local file, no external setup needed)
+# Database file: ./server/osteria.db (auto-created)
+
+# Optional: Supabase credentials (if using external auth)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your_key_here
+SUPABASE_JWT_SECRET=your_jwt_secret_here
+```
+
+**Note:** For this project, SQLite is used for local development. No external database configuration needed.
+
+### Frontend
+
+No `.env` file needed for frontend. API calls are hardcoded to `http://localhost:3001/api`.
+
+---
+
+## 🧪 Testing & Quality Assurance
+
+### Run Linter (ESLint)
+
+```bash
+npm run lint
+```
+
+Validates code formatting and catches syntax errors.
+
+### Run Tests (Vitest)
+
+```bash
+npm run test
+```
+
+Runs unit and integration tests.
+
+### Watch Mode (Development Testing)
+
+```bash
+npm run test:watch
+```
+
+Runs tests in watch mode during development.
+
+---
+
+## 📁 Project Structure
+
+```
+osteriarestaurant/
+├── src/                          # Frontend source code
+│   ├── pages/                    # Page components
+│   │   ├── Index.jsx            # Menu browsing page
+│   │   ├── Auth.jsx             # Sign In / Sign Up
+│   │   ├── Cart.jsx             # Shopping cart
+│   │   ├── Checkout.jsx         # Order checkout
+│   │   ├── Orders.jsx           # Order history
+│   │   ├── Admin.jsx            # Admin dashboard
+│   │   └── NotFound.jsx         # 404 page
+│   ├── components/               # Reusable UI components
+│   │   ├── Header.jsx           # Navigation header
+│   │   ├── Layout.jsx           # Page layout wrapper
+│   │   ├── ItemDetailsModal.jsx # Item details popup
+│   │   ├── ReviewModal.jsx      # Review submission
+│   │   ├── MenuItemEditor.jsx   # Admin menu editor
+│   │   └── ui/                  # Shadcn UI components
+│   ├── context/                  # State management
+│   │   ├── AuthContext.jsx      # User authentication state
+│   │   └── CartContext.jsx      # Shopping cart state
+│   ├── lib/                      # Utilities and API
+│   │   ├── api.js               # API wrapper functions
+│   │   ├── store.js             # HTTP client for backend
+│   │   └── utils.js             # Helper functions
+│   ├── hooks/                    # Custom React hooks
+│   ├── assets/                   # Images and static files
+│   ├── App.jsx                   # Root component
+│   └── main.jsx                  # Entry point
+├── server/                        # Backend source code
+│   ├── db.js                     # SQLite database layer
+│   ├── index.js                  # Express server setup
+│   ├── package.json              # Backend dependencies
+│   ├── routes/                   # API endpoint definitions
+│   │   ├── auth.js              # Authentication endpoints
+│   │   ├── menu.js              # Menu CRUD endpoints
+│   │   ├── orders.js            # Order management
+│   │   ├── reviews.js           # Review endpoints
+│   │   ├── users.js             # User endpoints
+│   │   ├── analytics.js         # Dashboard analytics
+│   │   └── receipts.js          # Receipt generation
+│   └── middleware/               # Express middleware
+│       └── auth.js              # Auth validation
+├── public/                        # Static assets
+├── supabase/                      # Supabase migrations (if used)
+├── package.json                   # Frontend dependencies
+├── vite.config.js                # Vite configuration
+├── tailwind.config.js            # Tailwind CSS config
+├── README.md                      # This file
+├── .gitignore                     # Git ignore rules
+└── .env.example                   # Environment variables template
+```
+
+---
+
+## 🔌 API Endpoints
+
+### Authentication
+- `POST /api/auth/login` - User login
+- `POST /api/auth/register` - User registration
+
+### Menu
+- `GET /api/menu` - Fetch menu items
+- `POST /api/menu` - Create menu item (admin)
+- `PATCH /api/menu/:id` - Update menu item (admin)
+- `DELETE /api/menu/:id` - Delete menu item (admin)
+
+### Orders
+- `GET /api/orders` - Fetch all orders (admin)
+- `GET /api/orders/:id` - Get specific order
+- `POST /api/orders` - Place new order
+- `PATCH /api/orders/:id/status` - Update order status (admin)
+
+### Reviews
+- `GET /api/reviews?item_id=X` - Fetch reviews for item
+- `POST /api/reviews` - Submit review
+
+### Analytics
+- `GET /api/analytics` - Dashboard KPIs and charts
+
+### Health Check
+- `GET /api/health` - Server status
+
+---
+
+## 👥 Default Test Accounts
+
+Use these credentials to test different user roles:
+
+### Admin Account
+- **Email:** `admin@osteria.com`
+- **Password:** `ChefMarco_Osteria2026!`
+- **Access:** Full admin dashboard, menu management, order control
+
+### Customer Account
+- **Email:** `customer@osteria.com`
+- **Password:** `SofiaEsposito_Osteria2026!`
+- **Access:** Browse menu, place orders, view order history, leave reviews
+
+---
+
+## 🎨 Design Highlights
+
+### Color Palette
+- **Warm Linen** - Soft cream tones for reduced eye fatigue
+- **Deep Terracotta** - Rich tomato-red for primary actions
+- **Amalfi Gold** - Warm amber for status indicators
+- **Basil Green** - Fresh green for availability indicators
+
+### Micro-Interactions
+- Rotating logo on hover
+- Smooth button scaling on click
+- Pop-in animations for notifications
+- Glassmorphic card designs with backdrop blur
+
+### Responsive Design
+- Mobile-first approach
+- Works perfectly on phones (320px+), tablets, and desktops
+- Touch-friendly buttons and spacing
+
+---
+
+## 🚨 Troubleshooting
+
+### Issue: "Failed to load menu"
+**Solution:** Ensure the backend is running:
+```bash
+npm run server
+```
+
+### Issue: Backend port 3001 already in use
+**Solution:** Kill the process using port 3001 or change the port in `server/index.js`:
+```javascript
+const PORT = process.env.PORT || 3001;  // Change 3001 to another port
+```
+
+### Issue: Database file not found
+**Solution:** The database auto-creates on first backend startup. If it doesn't:
+```bash
+npm run server
+```
+
+### Issue: "Invalid email or password" during login
+**Solution:** Use the default credentials provided above, or sign up a new account.
+
+### Issue: Frontend can't connect to backend
+**Solution:** Check that:
+1. Backend is running on `http://localhost:3001`
+2. CORS is enabled (it is by default)
+3. Firewall isn't blocking port 3001
+
+---
+
+## 📝 Development Workflow
+
+### Starting Fresh
+```bash
+# Install all dependencies
+npm install
+cd server && npm install && cd ..
+
+# Run the full application
+npm run dev:full
+```
+
+### Code Quality Checks
+```bash
+# Check for linting errors
+npm run lint
+
+# Run tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+```
+
+### Building for Production
+```bash
+npm run build
+```
+
+Creates optimized production build in `dist/` folder.
+
+---
+
+## 🐛 Known Limitations
+
+1. Database persistence is file-based (SQLite). For production, migrate to PostgreSQL or MongoDB.
+2. Authentication uses session tokens (localStorage). For production, implement JWT with refresh tokens.
+3. Real-time updates use polling (10-second intervals). For production, implement WebSocket for true real-time updates.
+4. Image uploads use external URLs. For production, implement local file upload storage.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is provided as-is for educational purposes.
+
+---
+
+## 👨‍💻 Author
+
+**Musman Shamsi**  
+Enterprise Application Development Student  
+Osteria Bella Dev Team
+
+---
+
+## 🔗 Quick Links
+
+- 📧 **Email:** musmanshamsi@email.com
+- 🐙 **GitHub:** [musmanshamsi](https://github.com/musmanshamsi)
+- 📱 **Repository:** [https://github.com/musmanshamsi/osteriarestaurant](https://github.com/musmanshamsi/osteriarestaurant)
+
+---
+
+## 📞 Support
+
+For issues, questions, or feature requests, please open an issue on GitHub or contact the development team.
+
+---
+
+*Created with Passion & Italian Hospitality by the Osteria Bella Dev Team.*  
+*Last Updated: June 3, 2026*
 ```json
 {
   "id": "m01",
