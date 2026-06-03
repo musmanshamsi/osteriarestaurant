@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <circle cx="50" cy="50" r="48" fill="#FFF8F0" stroke="#C2410C" stroke-width="2"/>
+  
+  <!-- Pizza slice -->
+  <path d="M 50 20 L 75 70 L 25 70 Z" fill="#DC2626" opacity="0.9"/>
+  
+  <!-- Cheese accent -->
+  <ellipse cx="50" cy="50" rx="15" ry="12" fill="#FCD34D" opacity="0.8"/>
+  
+  <!-- Basil leaf details -->
+  <circle cx="40" cy="45" r="3" fill="#16A34A" opacity="0.7"/>
+  <circle cx="60" cy="48" r="3" fill="#16A34A" opacity="0.7"/>
+  <circle cx="50" cy="55" r="2.5" fill="#16A34A" opacity="0.7"/>
+  
+  <!-- Fork outline on right side -->
+  <g stroke="#C2410C" stroke-width="2" fill="none" stroke-linecap="round">
+    <line x1="72" y1="30" x2="72" y2="65"/>
+    <line x1="65" y1="35" x2="65" y2="65"/>
+    <line x1="79" y1="35" x2="79" y2="65"/>
+    <path d="M 70 28 L 72 25 M 72 25 L 74 28"/>
+  </g>
+</svg>
