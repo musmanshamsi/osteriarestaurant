@@ -5,11 +5,17 @@
 const path    = require("path");
 const Database = require("better-sqlite3");
 
-const DB_PATH = path.join(__dirname, "osteria.db");
+const DB_PATH = process.env.VERCEL
+  ? path.join("/tmp", "osteria.db")
+  : path.join(__dirname, "osteria.db");
 const db      = new Database(DB_PATH);
 
-// Enable WAL mode for better performance
-db.pragma("journal_mode = WAL");
+// Enable WAL mode for better performance (fallback to DELETE on Vercel serverless /tmp)
+try {
+  db.pragma("journal_mode = WAL");
+} catch (e) {
+  // ignore if WAL unsupported in /tmp
+}
 db.pragma("foreign_keys = ON");
 
 // ─── Schema ───────────────────────────────────────────────────────────────────

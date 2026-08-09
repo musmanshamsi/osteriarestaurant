@@ -69,8 +69,10 @@ export async function placeOrder({ userId, customerName, items, total, address, 
 
 // ─── Receipts ─────────────────────────────────────────────────────────────────
 
+const BASE = import.meta.env.VITE_API_URL || "/api";
+
 export async function getReceipt(orderId) {
-  const res  = await fetch(`http://localhost:3001/api/receipts/${orderId}`);
+  const res  = await fetch(`${BASE}/receipts/${orderId}`);
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || "Receipt not found");
   return data; // { receipt }
@@ -79,7 +81,7 @@ export async function getReceipt(orderId) {
 // ─── Analytics ────────────────────────────────────────────────────────────────
 
 export async function getAnalytics() {
-  const res  = await fetch("http://localhost:3001/api/analytics");
+  const res  = await fetch(`${BASE}/analytics`);
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || "Analytics failed");
   return data; // { kpis, statusCounts, topItems, dailyChart }
