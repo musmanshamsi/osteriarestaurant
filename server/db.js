@@ -43,10 +43,12 @@ function seedPureJSStore() {
 }
 
 try {
-  const Database = require("better-sqlite3");
-  const DB_PATH = process.env.VERCEL
-    ? path.join("/tmp", "osteria.db")
-    : path.join(__dirname, "osteria.db");
+  if (process.env.VERCEL) {
+    throw new Error("Using pure JS store on Vercel serverless");
+  }
+  const pkg = "better-sqlite3";
+  const Database = require(pkg);
+  const DB_PATH = path.join(__dirname, "osteria.db");
   db = new Database(DB_PATH);
   try { db.pragma("journal_mode = WAL"); } catch (_) {}
   db.pragma("foreign_keys = ON");
