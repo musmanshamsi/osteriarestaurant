@@ -87,7 +87,7 @@ const Orders = () => {
 
   return (
     <Layout>
-      <div className="container max-w-4xl py-12 px-4">
+      <div className="container max-w-4xl py-8 sm:py-12 px-4">
         {/* ... (rest of the header and empty state remains the same) */}
         
         {/* Header (re-included for context) */}
@@ -101,8 +101,8 @@ const Orders = () => {
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Menu
             </Button>
-            <h1 className="font-display text-5xl font-bold tracking-tight">Order History</h1>
-            <p className="text-muted-foreground text-lg mt-2">Track your current cravings and past favorites.</p>
+            <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-tight">Order History</h1>
+            <p className="text-muted-foreground text-base sm:text-lg mt-2">Track your current cravings and past favorites.</p>
           </div>
           <Button variant="outline" onClick={() => loadOrders()} disabled={fetching} className="rounded-full border-border/60">
             <RefreshCw className={`h-4 w-4 mr-2 ${fetching ? 'animate-spin' : ''}`} />

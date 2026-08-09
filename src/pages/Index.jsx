@@ -127,7 +127,7 @@ const Index = () => {
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/30" />
         
-        <div className="container relative z-10 flex flex-1 flex-col justify-center py-16 text-primary-foreground">
+        <div className="container relative z-10 flex flex-1 flex-col justify-center py-10 sm:py-16 text-primary-foreground px-4">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4 animate-fade-up">
               <Badge className="bg-primary/90 text-primary-foreground px-3 py-1 text-[11px] font-semibold uppercase tracking-wider shadow-sm">
@@ -210,10 +210,11 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Filter Bar */}
-        <div className="sticky top-20 z-30 bg-background/80 backdrop-blur-xl border-y border-border/40 py-6 mb-12 flex flex-col lg:flex-row items-center justify-between gap-6 px-4 rounded-3xl shadow-xl shadow-black/5">
+        {/* Filter Bar — non-sticky on mobile to prevent blocking screen, sticky on desktop */}
+        <div className="relative lg:sticky lg:top-20 z-30 bg-background/90 backdrop-blur-xl border-y border-border/40 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-5 py-3 lg:py-4 mb-10 lg:rounded-3xl lg:shadow-xl lg:shadow-black/5 flex flex-col lg:flex-row items-center justify-between gap-3">
+          {/* Category pills — nowrap horizontal scroll on mobile */}
           <div
-            className="flex flex-wrap justify-center lg:justify-start gap-2"
+            className="flex flex-nowrap overflow-x-auto scrollbar-none gap-2 w-full lg:w-auto"
             role="tablist"
           >
             {CATEGORIES.map((c) => (
@@ -222,10 +223,10 @@ const Index = () => {
                 role="tab"
                 aria-selected={active === c.key}
                 onClick={() => setActive(c.key)}
-                className={`px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 border ${
+                className={`flex-shrink-0 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 border ${
                   active === c.key
-                    ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20 scale-105"
-                    : "bg-secondary/30 text-muted-foreground border-transparent hover:border-primary/20 hover:text-foreground"
+                    ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20"
+                    : "bg-secondary/40 text-muted-foreground border-transparent hover:border-primary/20 hover:text-foreground"
                 }`}
               >
                 {c.label}
@@ -233,26 +234,27 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:max-w-2xl">
-            <div className="relative flex-1 group w-full">
+          {/* Search + Sort — side by side on all screen sizes */}
+          <div className="flex items-center gap-2 w-full lg:max-w-md">
+            <div className="relative flex-1 group">
               <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors"
+                className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors"
               />
               <Input
                 type="search"
                 placeholder="Find your favorite..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="pl-11 h-12 bg-secondary/30 border-transparent rounded-full focus:bg-card focus:border-primary/40 focus:ring-4 focus:ring-primary/5 transition-all outline-none shadow-inner"
+                className="pl-10 h-10 bg-secondary/30 border-transparent rounded-full focus:bg-card focus:border-primary/40 focus:ring-4 focus:ring-primary/5 transition-all outline-none shadow-inner text-sm"
               />
             </div>
             
-            <div className="w-full sm:w-48">
+            <div className="w-36 shrink-0">
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="h-12 rounded-full bg-secondary/30 border-transparent focus:ring-4 focus:ring-primary/5 shadow-inner px-6 text-xs font-bold uppercase tracking-widest">
-                  <div className="flex items-center gap-2">
-                    <TrendingUp className="h-3.5 w-3.5 text-primary" />
-                    <SelectValue placeholder="Sort By" />
+                <SelectTrigger className="h-10 rounded-full bg-secondary/30 border-transparent focus:ring-4 focus:ring-primary/5 shadow-inner px-4 text-[10px] font-bold uppercase tracking-widest">
+                  <div className="flex items-center gap-1.5">
+                    <TrendingUp className="h-3 w-3 text-primary shrink-0" />
+                    <SelectValue placeholder="Sort" />
                   </div>
                 </SelectTrigger>
                 <SelectContent className="rounded-2xl border-border/40 shadow-2xl">
@@ -289,7 +291,7 @@ const Index = () => {
               <Card
                 key={i.id}
                 onClick={() => setSelectedDetailItem(i)}
-                className="group relative flex flex-col h-full rounded-[2.5rem] border-border/40 bg-card overflow-hidden transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] hover:-translate-y-3 animate-fade-up cursor-pointer"
+                className="group relative flex flex-col h-full rounded-[2rem] border-border/40 bg-card overflow-hidden transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] hover:-translate-y-3 animate-fade-up cursor-pointer"
                 style={{ animationDelay: `${Math.min(idx * 0.05, 0.5)}s` }}
               >
                 {/* Image Section */}
@@ -329,7 +331,7 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div className="p-8 flex flex-col h-full bg-gradient-to-b from-transparent to-secondary/5">
+                <div className="p-5 sm:p-8 flex flex-col h-full bg-gradient-to-b from-transparent to-secondary/5">
                   <div className="mb-4">
                     <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary mb-1.5 block opacity-60">
                       {i.category}
@@ -375,7 +377,7 @@ const Index = () => {
       <section className="bg-secondary/20 py-24 overflow-hidden relative">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
         <div className="container px-4">
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
             {[
               { icon: <Star className="h-8 w-8" />, title: "Premium Quality", desc: "We use only DOP-certified ingredients imported directly from local Italian producers." },
               { icon: <Clock className="h-8 w-8" />, title: "Fast Delivery", desc: "Our localized delivery network ensures your pizza arrives exactly as it left the oven." },

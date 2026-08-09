@@ -114,6 +114,14 @@
   .shadow-card { box-shadow: var(--shadow-card); }
   .transition-smooth { transition: var(--transition-smooth); }
   .text-balance { text-wrap: balance; }
+  /* Hide scrollbar but keep scroll functionality */
+  .scrollbar-none {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
 }
 
 @keyframes fade-up {

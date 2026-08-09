@@ -81,8 +81,8 @@ const Checkout = () => {
 
   return (
     <Layout>
-      <div className="container max-w-2xl py-12">
-        <h1 className="font-display text-4xl mb-8">Checkout</h1>
+      <div className="container max-w-2xl py-8 sm:py-12 px-4">
+        <h1 className="font-display text-3xl sm:text-4xl mb-6 sm:mb-8">Checkout</h1>
         <div className="grid gap-6">
           <Card className="p-6 bg-card border-border/60">
             <h2 className="font-display text-xl mb-4">Order Summary</h2>

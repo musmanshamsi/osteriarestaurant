@@ -11,8 +11,8 @@ const Cart = () => {
 
   return (
     <Layout>
-      <div className="container max-w-3xl py-12">
-        <h1 className="font-display text-4xl mb-8">Your Cart</h1>
+      <div className="container max-w-3xl py-8 sm:py-12 px-4">
+        <h1 className="font-display text-3xl sm:text-4xl mb-6 sm:mb-8">Your Cart</h1>
 
         {items.length === 0 ? (
           <Card className="p-12 text-center bg-card border-border/60">
@@ -33,7 +33,7 @@ const Cart = () => {
               {items.map((i) => (
                 <Card
                   key={i.id}
-                  className="p-4 flex items-center gap-4 bg-card border-border/60 shadow-card animate-fade-up"
+                  className="p-3 sm:p-4 flex items-center gap-3 sm:gap-4 bg-card border-border/60 shadow-card animate-fade-up"
                 >
                   <div className="flex-1 min-w-0">
                     <h3 className="font-display text-lg truncate">{i.name}</h3>

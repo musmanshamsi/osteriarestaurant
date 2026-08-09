@@ -34,8 +34,8 @@ export function ItemDetailsModal({ item, open, onClose }) {
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="max-w-2xl p-0 overflow-hidden border-border/40 bg-card rounded-2xl shadow-xl">
-        <div className="flex flex-col lg:flex-row h-full max-h-[85vh] overflow-y-auto lg:overflow-hidden">
+      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-2xl p-0 overflow-hidden border-border/40 bg-card rounded-2xl shadow-xl">
+        <div className="flex flex-col lg:flex-row h-full max-h-[90vh] sm:max-h-[85vh] overflow-y-auto lg:overflow-hidden">
           {/* Left: Image & Quick Stats */}
           <div className="lg:w-1/2 relative h-52 lg:h-auto">
             <img 

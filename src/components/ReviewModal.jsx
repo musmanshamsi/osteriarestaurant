@@ -46,7 +46,7 @@ export function ReviewModal({ items, userName, open, onClose, onSubmitted }) {
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="max-w-md p-0 overflow-hidden border-border/40 bg-card rounded-3xl">
+      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-md p-0 overflow-hidden border-border/40 bg-card rounded-3xl">
         <div className="h-2 w-full bg-gradient-to-r from-gold via-primary to-gold" />
         
         <DialogHeader className="px-8 pt-8 pb-4">

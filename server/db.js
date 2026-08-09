@@ -50,7 +50,7 @@ try {
   const Database = require(pkg);
   const DB_PATH = path.join(__dirname, "osteria.db");
   db = new Database(DB_PATH);
-  try { db.pragma("journal_mode = WAL"); } catch (_) {}
+  try { db.pragma("journal_mode = WAL"); } catch (_) { /* WAL mode optional */ }
   db.pragma("foreign_keys = ON");
 
   db.exec(`

@@ -161,7 +161,7 @@ export function AdminReceiptModal({ orderId, open, onClose }) {
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="max-w-md p-0 gap-0 overflow-hidden border-border/60 bg-card">
+      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-md p-0 gap-0 overflow-hidden border-border/60 bg-card">
         {/* Modal header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border/60 bg-secondary/30">
           <div className="flex items-center gap-2">

@@ -128,7 +128,7 @@ export function MenuItemEditor({ item, open, onClose, onSaved }) {
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="max-w-lg gap-0 p-0 overflow-hidden border-border/60 bg-card">
+      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-lg gap-0 p-0 overflow-hidden border-border/60 bg-card">
         {/* Top accent bar */}
         <div className="h-1 w-full bg-gradient-to-r from-primary via-gold to-primary" />
 

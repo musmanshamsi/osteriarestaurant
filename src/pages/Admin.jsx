@@ -256,7 +256,7 @@ const Admin = () => {
 
   return (
     <Layout>
-      <div className="container py-10 px-4 md:px-6">
+      <div className="container py-6 sm:py-10 px-4 md:px-6">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="animate-fade-up">
@@ -264,9 +264,9 @@ const Admin = () => {
               <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
                 <ChefHat className="h-7 w-7 text-primary" />
               </div>
-              <h1 className="font-display text-4xl font-bold tracking-tight">Admin Dashboard</h1>
+              <h1 className="font-display text-2xl sm:text-4xl font-bold tracking-tight">Admin Dashboard</h1>
             </div>
-            <p className="text-muted-foreground text-lg">Manage your kitchen, menu, and business performance.</p>
+            <p className="text-muted-foreground text-base sm:text-lg">Manage your kitchen, menu, and business performance.</p>
           </div>
           
           <div className="flex gap-3 animate-fade-up" style={{ animationDelay: "0.1s" }}>
@@ -314,8 +314,10 @@ const Admin = () => {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full animate-fade-up" style={{ animationDelay: "0.3s" }}>
-          <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
-            <TabsList className="bg-secondary/20 p-1.5 rounded-2xl border border-border/40">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+            {/* Horizontally scrollable tabs on mobile */}
+            <div className="w-full sm:w-auto overflow-x-auto scrollbar-none">
+              <TabsList className="bg-secondary/20 p-1.5 rounded-2xl border border-border/40 flex-nowrap min-w-max">
               <TabsTrigger value="orders" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all">
                 <ClipboardList className="h-4 w-4 mr-2" /> Live Orders
               </TabsTrigger>
@@ -328,9 +330,10 @@ const Admin = () => {
               <TabsTrigger value="analytics" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all">
                 <BarChart3 className="h-4 w-4 mr-2" /> Insights
               </TabsTrigger>
-            </TabsList>
+              </TabsList>
+            </div>
             
-            <div className="flex items-center gap-3 w-full md:max-w-md">
+            <div className="flex items-center gap-3 w-full sm:max-w-md">
               {activeTab === "menu" ? (
                 <div className="relative w-full group">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
@@ -396,7 +399,8 @@ const Admin = () => {
                 </div>
               </Card>
             ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+                {/* 3-column kanban - stacks on mobile, columns on lg */}
                 {/* 1. Pending Column */}
                 <div className="space-y-5">
                   <div className="flex items-center justify-between px-2">
