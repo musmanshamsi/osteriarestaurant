@@ -93,37 +93,37 @@ const Auth = () => {
 
   return (
     <Layout>
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12">
+      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-8">
         {/* Ambient background glow */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl" />
-          <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[450px] h-[450px] rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute top-1/3 left-1/3 w-[300px] h-[300px] rounded-full bg-gold/5 blur-3xl" />
         </div>
 
-        <div className="relative w-full max-w-md animate-fade-up">
+        <div className="relative w-full max-w-sm sm:max-w-md animate-fade-up">
           {/* Card */}
-          <div className="rounded-2xl border border-border/60 bg-card/95 backdrop-blur-sm shadow-2xl overflow-hidden">
+          <div className="rounded-xl border border-border/60 bg-card/95 backdrop-blur-sm shadow-xl overflow-hidden">
             {/* Top gradient bar */}
-            <div className="h-1.5 w-full bg-gradient-to-r from-primary via-gold to-primary" />
+            <div className="h-1 w-full bg-gradient-to-r from-primary via-gold to-primary" />
 
-            <div className="p-8">
+            <div className="p-6 sm:p-7">
               {/* Header */}
-              <div className="flex flex-col items-center text-center mb-8">
-                <div className="relative mb-4">
-                  <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                    <UtensilsCrossed className="h-8 w-8 text-primary" />
+              <div className="flex flex-col items-center text-center mb-6">
+                <div className="relative mb-3">
+                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                    <UtensilsCrossed className="h-6 w-6 text-primary" />
                   </div>
                   {adminHint && (
-                    <div className="absolute -top-1 -right-1 h-6 w-6 rounded-full bg-gold flex items-center justify-center shadow-md animate-bounce-in">
-                      <ShieldCheck className="h-3.5 w-3.5 text-white" />
+                    <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-gold flex items-center justify-center shadow-md">
+                      <ShieldCheck className="h-3 w-3 text-white" />
                     </div>
                   )}
                 </div>
 
-                <h1 className="font-display text-3xl font-bold">
-                  {mode === "signin" ? "Welcome back" : "Join Osteria Bella"}
+                <h1 className="font-display text-2xl font-bold tracking-tight">
+                  {mode === "signin" ? "Welcome Back" : "Join Osteria Bella"}
                 </h1>
-                <p className="text-muted-foreground text-sm mt-2">
+                <p className="text-muted-foreground text-xs mt-1">
                   {adminHint
                     ? "Admin portal — secure sign in"
                     : mode === "signin"
@@ -133,7 +133,7 @@ const Auth = () => {
 
                 {/* Admin hint badge */}
                 {adminHint && (
-                  <div className="mt-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-medium">
+                  <div className="mt-2.5 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold/10 border border-gold/30 text-gold text-[11px] font-medium">
                     <ShieldCheck className="h-3 w-3" />
                     Admin Portal Detected
                   </div>
@@ -141,14 +141,14 @@ const Auth = () => {
               </div>
 
               {/* Mode toggle pills */}
-              <div className="flex rounded-xl bg-muted/60 p-1 mb-6">
+              <div className="flex rounded-lg bg-muted/60 p-1 mb-5">
                 {["signin", "signup"].map((m) => (
                   <button
                     key={m}
                     onClick={() => setMode(m)}
-                    className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                    className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
                       mode === m
-                        ? "bg-card text-foreground shadow-sm"
+                        ? "bg-card text-foreground shadow-xs"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
@@ -159,11 +159,11 @@ const Auth = () => {
 
               {/* Demo Credentials Helper */}
               {mode === "signin" && (
-                <div className="mb-6 p-4 rounded-xl border border-border/60 bg-muted/30 text-center animate-fade-up">
-                  <span className="block text-[10px] font-bold tracking-wider uppercase text-muted-foreground/80 mb-2.5">
+                <div className="mb-5 p-3 rounded-lg border border-border/50 bg-muted/20 text-center animate-fade-up">
+                  <span className="block text-[10px] font-bold tracking-wider uppercase text-muted-foreground/80 mb-2">
                     Demo Accounts (Click to Autofill)
                   </span>
-                  <div className="flex gap-2.5 justify-center">
+                  <div className="flex gap-2 justify-center">
                     <button
                       type="button"
                       onClick={() => {
@@ -171,10 +171,10 @@ const Auth = () => {
                         setPassword("ChefMarco_Osteria2026!");
                         toast.success("🔑 Admin credentials loaded!");
                       }}
-                      className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 active:scale-95 transition-all duration-200 flex items-center gap-1.5"
+                      className="px-2.5 py-1 text-xs font-medium rounded-md bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 active:scale-95 transition-all duration-200 flex items-center gap-1"
                     >
                       <span>Chef Marco</span>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/20 text-primary uppercase font-bold">Admin</span>
+                      <span className="text-[9px] px-1 py-0.2 rounded bg-primary/20 text-primary uppercase font-bold">Admin</span>
                     </button>
                     <button
                       type="button"
@@ -183,10 +183,10 @@ const Auth = () => {
                         setPassword("SofiaEsposito_Osteria2026!");
                         toast.success("👋 Customer credentials loaded!");
                       }}
-                      className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-gold/10 border border-gold/30 text-gold hover:bg-gold/20 active:scale-95 transition-all duration-200 flex items-center gap-1.5"
+                      className="px-2.5 py-1 text-xs font-medium rounded-md bg-gold/10 border border-gold/30 text-gold hover:bg-gold/20 active:scale-95 transition-all duration-200 flex items-center gap-1"
                     >
                       <span>Sofia Esposito</span>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-gold/20 text-gold uppercase font-bold">Customer</span>
+                      <span className="text-[9px] px-1 py-0.2 rounded bg-gold/20 text-gold uppercase font-bold">Customer</span>
                     </button>
                   </div>
                 </div>

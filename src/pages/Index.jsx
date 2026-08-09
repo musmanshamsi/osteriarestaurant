@@ -116,46 +116,45 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative h-[80vh] min-h-[550px] w-full overflow-hidden">
+      <section className="relative h-[60vh] min-h-[420px] max-h-[540px] w-full overflow-hidden">
         <img
           src={heroImg}
           alt="Wood-fired Margherita pizza, spaghetti and red wine on a rustic wooden table"
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[10000ms] hover:scale-110"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[10000ms] hover:scale-105"
           width={1920}
           height={1080}
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-        <div className="container relative z-10 flex h-full flex-col justify-end pb-24 text-primary-foreground">
-          <div className="flex items-center gap-2 mb-6 animate-fade-up">
-            <Badge className="bg-primary/90 text-primary-foreground px-3 py-1 text-xs font-bold uppercase tracking-widest">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+        <div className="container relative z-10 flex h-full flex-col justify-end pb-14 text-primary-foreground">
+          <div className="flex items-center gap-2 mb-4 animate-fade-up">
+            <Badge className="bg-primary/90 text-primary-foreground px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider">
               Est. 1978
             </Badge>
-            <Badge variant="outline" className="text-white border-white/40 backdrop-blur-md px-3 py-1 text-xs font-bold uppercase tracking-widest">
-              Authentic Wood-fired
+            <Badge variant="outline" className="text-white border-white/40 backdrop-blur-md px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider">
+              Authentic Wood-Fired
             </Badge>
           </div>
           <h1
-            className="font-display text-6xl md:text-8xl font-black text-balance text-white leading-[0.9] animate-fade-up"
+            className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-balance text-white leading-tight animate-fade-up"
             style={{ animationDelay: "0.1s" }}
           >
             A taste of <em className="text-primary-glow not-italic">Italia</em>,
             <br /> delivered to <span className="text-gold italic">you.</span>
           </h1>
           <p
-            className="mt-6 max-w-xl text-xl text-white/80 font-medium animate-fade-up"
+            className="mt-4 max-w-lg text-base sm:text-lg text-white/85 font-medium animate-fade-up"
             style={{ animationDelay: "0.2s" }}
           >
-            Hand-stretched dough, slow-simmered ragù, and family secrets —
-            crafted with passion, delivered hot.
+            Hand-stretched dough, slow-simmered ragù, and family secrets — crafted with passion, delivered hot.
           </p>
           <div
-            className="mt-10 flex flex-wrap gap-4 animate-fade-up"
+            className="mt-6 flex flex-wrap gap-3 animate-fade-up"
             style={{ animationDelay: "0.3s" }}
           >
             <Button
               size="lg"
-              className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-10 h-14 rounded-full shadow-2xl shadow-primary/20 hover:scale-105 transition-transform"
+              className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-7 h-11 rounded-full shadow-lg hover:scale-102 transition-transform text-sm font-semibold"
               onClick={() =>
                 document
                   .getElementById("menu")
@@ -167,7 +166,7 @@ const Index = () => {
             <Button
               size="lg"
               variant="outline"
-              className="bg-white/5 backdrop-blur-md text-white border-white/20 hover:bg-white/10 px-10 h-14 rounded-full hover:scale-105 transition-transform"
+              className="bg-white/10 backdrop-blur-md text-white border-white/25 hover:bg-white/20 px-7 h-11 rounded-full text-sm font-semibold transition-transform"
               onClick={() =>
                 document
                   .getElementById("menu")
@@ -177,22 +176,17 @@ const Index = () => {
               Order Now
             </Button>
           </div>
-          
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-40">
-            <span className="text-[10px] uppercase font-black tracking-widest">Scroll to explore</span>
-            <div className="h-6 w-px bg-white" />
-          </div>
         </div>
       </section>
 
       {/* Menu Section */}
-      <section id="menu" className="container py-24 scroll-mt-20">
-        <div className="flex flex-col items-center text-center mb-16">
-          <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-            <ChefHat className="h-8 w-8 text-primary" />
+      <section id="menu" className="container py-14 sm:py-16 scroll-mt-16">
+        <div className="flex flex-col items-center text-center mb-10">
+          <div className="h-11 w-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+            <ChefHat className="h-6 w-6 text-primary" />
           </div>
-          <h2 className="font-display text-5xl md:text-6xl font-bold tracking-tight">Our Menu</h2>
-          <p className="text-muted-foreground mt-4 max-w-xl text-lg">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">Our Menu</h2>
+          <p className="text-muted-foreground mt-2 max-w-md text-sm sm:text-base">
             Every dish is a story of tradition, crafted daily with the finest DOP-certified ingredients.
           </p>
         </div>
