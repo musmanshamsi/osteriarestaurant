@@ -24,6 +24,14 @@ app.use((req, _res, next) => {
   next();
 });
 
+// ─── Path Normalizer for Vercel Serverless Functions ─────────────────────────
+app.use((req, _res, next) => {
+  if (!req.url.startsWith("/api")) {
+    req.url = "/api" + (req.url.startsWith("/") ? req.url : "/" + req.url);
+  }
+  next();
+});
+
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use("/api/auth",      authRouter);
 app.use("/api/menu",      menuRouter);

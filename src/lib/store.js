@@ -11,7 +11,13 @@ async function request(method, path, body) {
   };
   if (body) opts.body = JSON.stringify(body);
   const res  = await fetch(`${BASE}${path}`, opts);
-  const data = await res.json();
+  const text = await res.text();
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch (e) {
+    throw new Error(text || `Server returned error (${res.status})`);
+  }
   if (!res.ok) throw new Error(data.error || `Request failed: ${res.status}`);
   return data;
 }
