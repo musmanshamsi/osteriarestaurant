@@ -8,7 +8,7 @@ const db      = require("../db");
  * Body: { email, password }
  */
 router.post("/login", (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body || {};
   if (!email || !password) {
     return res.status(400).json({ error: "Email and password are required" });
   }
@@ -24,7 +24,7 @@ router.post("/login", (req, res) => {
  * Body: { email, password, name }
  */
 router.post("/register", (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password, name } = req.body || {};
   if (!email || !password || !name) {
     return res.status(400).json({ error: "Email, password, and name are required" });
   }
