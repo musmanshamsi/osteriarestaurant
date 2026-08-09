@@ -116,7 +116,7 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative h-[60vh] min-h-[420px] max-h-[540px] w-full overflow-hidden">
+      <section className="relative min-h-[calc(100vh-4rem)] w-full overflow-hidden flex flex-col justify-between">
         <img
           src={heroImg}
           alt="Wood-fired Margherita pizza, spaghetti and red wine on a rustic wooden table"
@@ -125,57 +125,76 @@ const Index = () => {
           height={1080}
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-        <div className="container relative z-10 flex h-full flex-col justify-end pb-14 text-primary-foreground">
-          <div className="flex items-center gap-2 mb-4 animate-fade-up">
-            <Badge className="bg-primary/90 text-primary-foreground px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider">
-              Est. 1978
-            </Badge>
-            <Badge variant="outline" className="text-white border-white/40 backdrop-blur-md px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider">
-              Authentic Wood-Fired
-            </Badge>
-          </div>
-          <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-balance text-white leading-tight animate-fade-up"
-            style={{ animationDelay: "0.1s" }}
-          >
-            A taste of <em className="text-primary-glow not-italic">Italia</em>,
-            <br /> delivered to <span className="text-gold italic">you.</span>
-          </h1>
-          <p
-            className="mt-4 max-w-lg text-base sm:text-lg text-white/85 font-medium animate-fade-up"
-            style={{ animationDelay: "0.2s" }}
-          >
-            Hand-stretched dough, slow-simmered ragù, and family secrets — crafted with passion, delivered hot.
-          </p>
-          <div
-            className="mt-6 flex flex-wrap gap-3 animate-fade-up"
-            style={{ animationDelay: "0.3s" }}
-          >
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-7 h-11 rounded-full shadow-lg hover:scale-102 transition-transform text-sm font-semibold"
-              onClick={() =>
-                document
-                  .getElementById("menu")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/30" />
+        
+        <div className="container relative z-10 flex flex-1 flex-col justify-center py-16 text-primary-foreground">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2 mb-4 animate-fade-up">
+              <Badge className="bg-primary/90 text-primary-foreground px-3 py-1 text-[11px] font-semibold uppercase tracking-wider shadow-sm">
+                Est. 1978
+              </Badge>
+              <Badge variant="outline" className="text-white border-white/40 backdrop-blur-md px-3 py-1 text-[11px] font-semibold uppercase tracking-wider">
+                Authentic Wood-Fired
+              </Badge>
+            </div>
+            <h1
+              className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold text-balance text-white leading-[1.05] animate-fade-up"
+              style={{ animationDelay: "0.1s" }}
             >
-              Browse the Menu
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-white/10 backdrop-blur-md text-white border-white/25 hover:bg-white/20 px-7 h-11 rounded-full text-sm font-semibold transition-transform"
-              onClick={() =>
-                document
-                  .getElementById("menu")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+              A taste of <em className="text-primary-glow not-italic">Italia</em>,
+              <br /> delivered to <span className="text-gold italic">you.</span>
+            </h1>
+            <p
+              className="mt-5 max-w-lg text-base sm:text-xl text-white/85 font-medium leading-relaxed animate-fade-up"
+              style={{ animationDelay: "0.2s" }}
             >
-              Order Now
-            </Button>
+              Hand-stretched dough, slow-simmered ragù, and family secrets — crafted with passion, delivered hot.
+            </p>
+            <div
+              className="mt-8 flex flex-wrap gap-3.5 animate-fade-up"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-8 h-12 rounded-full shadow-xl hover:scale-102 transition-transform text-sm font-semibold"
+                onClick={() =>
+                  document
+                    .getElementById("menu")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                Browse the Menu
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-white/10 backdrop-blur-md text-white border-white/30 hover:bg-white/20 px-8 h-12 rounded-full text-sm font-semibold transition-transform"
+                onClick={() =>
+                  document
+                    .getElementById("menu")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                Order Now
+              </Button>
+            </div>
           </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="relative z-10 pb-6 text-center">
+          <button
+            onClick={() =>
+              document
+                .getElementById("menu")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="inline-flex flex-col items-center gap-1 text-white/60 hover:text-white transition-colors cursor-pointer"
+            aria-label="Scroll down to menu"
+          >
+            <span className="text-[10px] font-bold uppercase tracking-widest">Scroll to explore</span>
+            <div className="h-4 w-px bg-white/40 animate-pulse" />
+          </button>
         </div>
       </section>
 
