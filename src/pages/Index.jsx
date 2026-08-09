@@ -14,7 +14,17 @@ import {
   Star, 
   Clock, 
   RefreshCw,
-  CheckCircle2
+  CheckCircle2,
+  BarChart3,
+  LayoutDashboard,
+  Utensils,
+  Layers,
+  ShieldCheck,
+  MessageSquare,
+  ArrowRight,
+  Sparkles,
+  ShoppingBag,
+  Database
 } from "lucide-react";
 import { 
   Select, 
@@ -129,12 +139,15 @@ const Index = () => {
         
         <div className="container relative z-10 flex flex-1 flex-col justify-center py-16 text-primary-foreground">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-4 animate-fade-up">
+            <div className="flex flex-wrap items-center gap-2 mb-4 animate-fade-up">
               <Badge className="bg-primary/90 text-primary-foreground px-3 py-1 text-[11px] font-semibold uppercase tracking-wider shadow-sm">
                 Est. 1978
               </Badge>
               <Badge variant="outline" className="text-white border-white/40 backdrop-blur-md px-3 py-1 text-[11px] font-semibold uppercase tracking-wider">
                 Authentic Wood-Fired
+              </Badge>
+              <Badge variant="outline" className="text-amber-300 border-amber-400/40 bg-amber-500/10 backdrop-blur-md px-3 py-1 text-[11px] font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                <Layers className="h-3 w-3" /> Three-Tier HCI Architecture
               </Badge>
             </div>
             <h1
@@ -148,7 +161,7 @@ const Index = () => {
               className="mt-5 max-w-lg text-base sm:text-xl text-white/85 font-medium leading-relaxed animate-fade-up"
               style={{ animationDelay: "0.2s" }}
             >
-              Hand-stretched dough, slow-simmered ragù, and family secrets — crafted with passion, delivered hot.
+              Hand-stretched dough, slow-simmered ragù, and family secrets — crafted with passion, delivered hot with full-stack kitchen tracking.
             </p>
             <div
               className="mt-8 flex flex-wrap gap-3.5 animate-fade-up"
@@ -177,6 +190,15 @@ const Index = () => {
               >
                 Order Now
               </Button>
+              <a href="/admin">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-amber-500/20 backdrop-blur-md text-amber-200 border-amber-500/40 hover:bg-amber-500/30 px-6 h-12 rounded-full text-sm font-semibold transition-all flex items-center gap-2"
+                >
+                  <LayoutDashboard className="h-4 w-4" /> Admin & BI Dashboard
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -186,15 +208,165 @@ const Index = () => {
           <button
             onClick={() =>
               document
-                .getElementById("menu")
+                .getElementById("features-showcase")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
             className="inline-flex flex-col items-center gap-1 text-white/60 hover:text-white transition-colors cursor-pointer"
-            aria-label="Scroll down to menu"
+            aria-label="Scroll down to features showcase"
           >
-            <span className="text-[10px] font-bold uppercase tracking-widest">Scroll to explore</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest">Scroll to explore system</span>
             <div className="h-4 w-px bg-white/40 animate-pulse" />
           </button>
+        </div>
+      </section>
+
+      {/* System Features & HCI Architecture Showcase Section */}
+      <section id="features-showcase" className="relative py-20 bg-gradient-to-b from-black/95 via-secondary/30 to-background border-b border-border/40 overflow-hidden">
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+        
+        <div className="container px-4 sm:px-6 relative z-10">
+          <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-up">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono font-bold tracking-widest uppercase mb-4">
+              <Sparkles className="h-3.5 w-3.5" /> Full-Stack System Features
+            </div>
+            <h2 className="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+              Osteria Bella <span className="text-primary italic">Platform</span> Architecture
+            </h2>
+            <p className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed">
+              Designed with a warm, authentic Italian bistro aesthetic adhering to strict Human-Computer Interaction (HCI) standards and a robust three-tier architecture.
+            </p>
+          </div>
+
+          {/* 6 Feature Pillars Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {/* Card 1: Customer Experience */}
+            <div className="group relative p-8 rounded-[2rem] bg-card/80 backdrop-blur-md border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1.5 flex flex-col justify-between">
+              <div>
+                <div className="h-14 w-14 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Utensils className="h-7 w-7" />
+                </div>
+                <Badge className="bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/20 text-[10px] uppercase font-bold tracking-wider mb-3">
+                  Tier 1: Client Portal
+                </Badge>
+                <h3 className="font-display text-2xl font-bold text-foreground mb-2">
+                  Customer Experience
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Seamless, intuitive menu browsing with instant category filtering, real-time search, interactive dish detail modals, smart cart management, and streamlined order placement.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-amber-500">
+                <CheckCircle2 className="h-4 w-4" /> Intuitive UI & Cart Management
+              </div>
+            </div>
+
+            {/* Card 2: Admin Dashboard */}
+            <div className="group relative p-8 rounded-[2rem] bg-card/80 backdrop-blur-md border border-border/50 hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1.5 flex flex-col justify-between">
+              <div>
+                <div className="h-14 w-14 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <LayoutDashboard className="h-7 w-7" />
+                </div>
+                <Badge className="bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/20 text-[10px] uppercase font-bold tracking-wider mb-3">
+                  Kitchen Operations
+                </Badge>
+                <h3 className="font-display text-2xl font-bold text-foreground mb-2">
+                  Admin Kitchen Dashboard
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Real-time kitchen order management with live status tracking (<span className="text-amber-500 font-semibold">Pending</span> ➔ <span className="text-blue-500 font-semibold">Preparing</span> ➔ <span className="text-indigo-500 font-semibold">Ready</span> ➔ <span className="text-emerald-500 font-semibold">Delivered</span>), instant status updates, and printable kitchen receipts.
+                </p>
+              </div>
+              <a href="/admin" className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-500 hover:underline">
+                Explore Admin Dashboard <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
+
+            {/* Card 3: Business Intelligence */}
+            <div className="group relative p-8 rounded-[2rem] bg-card/80 backdrop-blur-md border border-border/50 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-1.5 flex flex-col justify-between">
+              <div>
+                <div className="h-14 w-14 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <BarChart3 className="h-7 w-7" />
+                </div>
+                <Badge className="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 text-[10px] uppercase font-bold tracking-wider mb-3">
+                  Data & Metrics
+                </Badge>
+                <h3 className="font-display text-2xl font-bold text-foreground mb-2">
+                  Business Intelligence
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Analytics widgets displaying real-time revenue metrics, total orders, average order value, and category-wise sales distribution charts powered by Recharts.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-emerald-500">
+                <TrendingUp className="h-4 w-4" /> Live Revenue & Sales Charts
+              </div>
+            </div>
+
+            {/* Card 4: Menu Management */}
+            <div className="group relative p-8 rounded-[2rem] bg-card/80 backdrop-blur-md border border-border/50 hover:border-purple-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-1.5 flex flex-col justify-between">
+              <div>
+                <div className="h-14 w-14 rounded-2xl bg-purple-500/10 text-purple-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <ChefHat className="h-7 w-7" />
+                </div>
+                <Badge className="bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/20 text-[10px] uppercase font-bold tracking-wider mb-3">
+                  Full CRUD Operations
+                </Badge>
+                <h3 className="font-display text-2xl font-bold text-foreground mb-2">
+                  Menu Management
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Complete CRUD operations for menu items with availability toggles, image URLs, pricing updates, and instant menu synchronization across all customers.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-purple-500">
+                <CheckCircle2 className="h-4 w-4" /> Real-time Availability Control
+              </div>
+            </div>
+
+            {/* Card 5: Review System */}
+            <div className="group relative p-8 rounded-[2rem] bg-card/80 backdrop-blur-md border border-border/50 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:shadow-gold/10 hover:-translate-y-1.5 flex flex-col justify-between">
+              <div>
+                <div className="h-14 w-14 rounded-2xl bg-amber-400/10 text-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <MessageSquare className="h-7 w-7" />
+                </div>
+                <Badge className="bg-amber-400/15 text-amber-600 dark:text-amber-400 border-amber-400/20 text-[10px] uppercase font-bold tracking-wider mb-3">
+                  Interactive Feedback
+                </Badge>
+                <h3 className="font-display text-2xl font-bold text-foreground mb-2">
+                  Customer Review System
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Customers can rate individual menu items, write detailed reviews, view aggregate star ratings, and leave dish feedback for the kitchen.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-amber-500">
+                <Star className="h-4 w-4 fill-current" /> 5-Star Rating & Review Modal
+              </div>
+            </div>
+
+            {/* Card 6: 3-Tier Architecture & HCI Standards */}
+            <div className="group relative p-8 rounded-[2rem] bg-card/80 backdrop-blur-md border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1.5 flex flex-col justify-between">
+              <div>
+                <div className="h-14 w-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Database className="h-7 w-7" />
+                </div>
+                <Badge className="bg-primary/15 text-primary border-primary/20 text-[10px] uppercase font-bold tracking-wider mb-3">
+                  Engineering Architecture
+                </Badge>
+                <h3 className="font-display text-2xl font-bold text-foreground mb-2">
+                  3-Tier Architecture & HCI
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Strict three-tier separation (<span className="text-primary font-semibold">React Frontend</span> ➔ <span className="text-foreground font-semibold">API Middleware</span> ➔ <span className="text-emerald-500 font-semibold">Database</span>) with robust error handling, responsive mobile layout, and high HCI usability.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-primary">
+                <ShieldCheck className="h-4 w-4" /> HCI & Clean Separation Standards
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
