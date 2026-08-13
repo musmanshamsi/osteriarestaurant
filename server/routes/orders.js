@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
   // Enrich with customer name from users table
   const enriched = orders.map(o => {
     const user = db.getUserById(o.user_id);
-    return { ...o, customer_name: o.customer_name || user.name };
+    return { ...o, customer_name: o.customer_name || user?.name || "Guest" };
   });
   res.json({ orders: enriched, total: enriched.length });
 });

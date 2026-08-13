@@ -145,8 +145,8 @@ const Admin = () => {
   // Filtered and Sorted Orders
   const filteredOrders = useMemo(() => {
     let list = orders.filter(o => 
-      o.customer_name.toLowerCase().includes(orderSearchQuery.toLowerCase()) ||
-      o.id.toLowerCase().includes(orderSearchQuery.toLowerCase())
+      (o.customer_name || "").toLowerCase().includes(orderSearchQuery.toLowerCase()) ||
+      (o.id || "").toLowerCase().includes(orderSearchQuery.toLowerCase())
     );
     
     // Default FIFO for active, LIFO for history is handled in the columns

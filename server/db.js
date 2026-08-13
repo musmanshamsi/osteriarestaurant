@@ -2,9 +2,12 @@
 // Supports local persistent SQLite and Vercel serverless pure JS fallback.
 
 const path = require("path");
+const fs   = require("fs");
 
 let useSQLite = false;
 let db = null;
+
+const TMP_STORE_PATH = "/tmp/osteria_store.json";
 
 // Pure JS Store (Fallback for serverless environments without native C++ bindings)
 const jsStore = {
@@ -15,7 +18,26 @@ const jsStore = {
   reviews: [],
 };
 
+function persistJSStore() {
+  try {
+    fs.writeFileSync(TMP_STORE_PATH, JSON.stringify(jsStore));
+  } catch (_e) {
+    // Ignore write errors if /tmp is read-only
+  }
+}
+
 function seedPureJSStore() {
+  try {
+    if (fs.existsSync(TMP_STORE_PATH)) {
+      const data = JSON.parse(fs.readFileSync(TMP_STORE_PATH, "utf8"));
+      if (data && Array.isArray(data.orders)) {
+        Object.assign(jsStore, data);
+        return;
+      }
+    }
+  } catch (e) {
+    console.warn("⚠️ Could not load /tmp store:", e.message);
+  }
   jsStore.users = [
     { id: "user-admin-001", email: "admin@osteria.com", password: "ChefMarco_Osteria2026!", name: "Chef Marco", role: "admin", created_at: new Date().toISOString() },
     { id: "user-cust-002", email: "customer@osteria.com", password: "SofiaEsposito_Osteria2026!", name: "Sofia Esposito", role: "customer", created_at: new Date().toISOString() }
@@ -315,10 +337,16 @@ module.exports = {
 
   addOrder({ id, userId, customerName, items, total, address, notes }) {
     if (useSQLite) {
+      const userExists = db.prepare("SELECT id FROM users WHERE id = ?").get(userId);
+      if (!userExists) {
+        db.prepare("INSERT OR IGNORE INTO users (id, email, password, name, role) VALUES (?, ?, 'password', ?, 'customer')").run(
+          userId, `${userId}@customer.local`, customerName || "Guest"
+        );
+      }
       const addOrderTx = db.transaction(() => {
-        db.prepare("INSERT INTO orders (id, user_id, customer_name, status, total, address, notes) VALUES (?, ?, ?, 'pending', ?, ?, ?)").run(id, userId, customerName, total, address || null, notes || null);
+        db.prepare("INSERT INTO orders (id, user_id, customer_name, status, total, address, notes) VALUES (?, ?, ?, 'pending', ?, ?, ?)").run(id, userId, customerName || "Guest", Number(total) || 0, address || null, notes || null);
         for (const it of items) {
-          db.prepare("INSERT INTO order_items (order_id, item_id, name, price, quantity) VALUES (?, ?, ?, ?, ?)").run(id, it.id || it.item_id || "unknown", it.name, Number(it.price), it.quantity);
+          db.prepare("INSERT INTO order_items (order_id, item_id, name, price, quantity) VALUES (?, ?, ?, ?, ?)").run(id, it.id || it.item_id || "unknown", it.name, Number(it.price) || 0, Number(it.quantity) || 1);
         }
       });
       addOrderTx();
@@ -327,24 +355,25 @@ module.exports = {
     const newOrder = {
       id,
       user_id: userId,
-      customer_name: customerName,
+      customer_name: customerName || "Guest",
       status: "pending",
-      total: Number(total),
+      total: Number(total) || 0,
       address: address || null,
       notes: notes || null,
       created_at: new Date().toISOString()
     };
     jsStore.orders.unshift(newOrder);
-    items.forEach(it => {
+    (items || []).forEach(it => {
       jsStore.orderItems.push({
         id: Date.now() + Math.random(),
         order_id: id,
         item_id: it.id || it.item_id || "unknown",
         name: it.name,
-        price: Number(it.price),
-        quantity: Number(it.quantity)
+        price: Number(it.price) || 0,
+        quantity: Number(it.quantity) || 1
       });
     });
+    persistJSStore();
     return this.getOrderById(id);
   },
 
@@ -357,6 +386,7 @@ module.exports = {
     if (!o) return null;
     o.status = status;
     o.updated_at = new Date().toISOString();
+    persistJSStore();
     return this.getOrderById(id);
   },
 
